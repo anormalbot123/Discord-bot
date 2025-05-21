@@ -23,7 +23,7 @@ async def heh(ctx, count_heh = 5):
     await ctx.send("he" * count_heh)
 
 @bot.command()
-async def password(ctx, length = 5):
+async def password(ctx, length = 8):
     await ctx.send(logic.gen_pass(length))
 
 @bot.command()
