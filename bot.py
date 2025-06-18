@@ -2,6 +2,7 @@ from settings import *
 import logic
 import os
 import random
+from math import pi
 
 import asyncio
 import discord
@@ -18,7 +19,7 @@ bot = commands.Bot(command_prefix=setting["prefix"], intents=intents, help_comma
 async def on_ready():
     print(f'Hemos iniciado sesión como {bot.user}')
 
-@bot.command()
+@bot.event
 async def joined(ctx, member: discord.Member):
     # Says when a member joined.
     await ctx.send(f'{member.name} joined {discord.utils.format_dt(member.joined_at)}')
@@ -63,6 +64,10 @@ async def meme(ctx):
         await ctx.send('Tienes suerte! Acaba de salir un meme de pocas probabilidades!')
 
 @bot.command()
+async def sine_function(ctx, amp=1, per=pi * 2, x_shift=0, y_shift=0):
+    await ctx.send(logic.do_sine_func(amp=amp, per=per, x_shift=x_shift, y_shift=y_shift))
+
+@bot.command()
 async def random_anime(ctx):
     await ctx.send(logic.get_anime_name())
 
@@ -74,6 +79,7 @@ $password # - generara una password con la longitud indicada
 $editme - un mensaje para flexear
 $meme - manda un meme aleatorio
 $random_anime - manda un nombre de anime aleatorio
+$sine_function # # # # - devuelve una funcion de seno
 nota - comandos con # significa que aceptan un numero pero no es obligatorio""")    
 
 bot.run(setting["token"])
